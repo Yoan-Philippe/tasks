@@ -1,0 +1,937 @@
+/*
+Auteur : Yoan Philippe
+Email : yoan.philippe@hotmail.com
+Date : 2014-06-01
+*/
+/************** STYLE GÉNÉRALE *****************/
+body{
+	font-family:'Lato', sans-serif;	
+	overflow-x:hidden;
+	margin: 0;
+}
+
+html,body,.container{
+	background-color: #E9F0F8;
+}
+
+.container {
+	margin:0;
+	text-align:center;
+	color: #999;
+	clear: both;
+	background-color: #e9f0f8;
+}
+
+a, a:visited {
+	text-decoration:none;
+}
+li{
+	list-style: none;
+}
+
+h1,h2 {
+	font-size: 1.8em;
+	margin: 20px;
+	margin-top: 0;
+	color: #4a4a4a;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #314c6a;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+/************** FIN STYLE GÉNÉRALE *****************/
+
+
+
+
+
+/************** ENTÊTE GLOBALE *****************/
+#entete{
+	height: 90px;
+	background: linear-gradient(#3776c0, #2763a9);
+}
+#logout{
+	float:right;
+	margin: 35px 30px 0 0;
+}
+#logout a:link,#logout a:visited{
+	color:#ebf4fd;;
+}
+#bonjour{
+	position: absolute;
+	font-size:20px;
+	left:-200px;
+	top:10px;
+	color:#ebf4fd;
+}
+#decoM{
+	display:none;
+}
+#lienAccueil{
+	position: absolute;
+	left:34%;
+}
+#decoT{
+	margin-right: 5px;
+}
+.titreM{
+	display:none;
+}
+
+/************** FIN ENTÊTE GLOBALE *****************/
+
+
+
+
+/************** ERREURS & ALERTE *****************/
+.erreur{
+	color:red;
+}
+.erreur-login{
+	height: 25px;
+}
+.erreur ul li{
+	list-style: square;
+	text-align:left;
+}
+.error{
+	border: 1px solid red !important;
+}
+.errorMessage{
+	color:red;
+	position: absolute;
+	padding-left: 15px;
+	margin-left:30px; 
+	width:60%;
+	padding-right: 15px;
+	text-align: left !important;
+}
+
+#titreNotFound{
+	margin-top:20px;
+}
+.alert{
+	display: none;
+	padding: 30px;
+	left:30%;
+	right: 30%;
+	z-index: 99;
+	top:20px;
+	border-radius: 5px;
+	background-color: #2ecc71;
+	color: #FFF;
+	max-width: 600px;
+	word-wrap: break-word;
+	position: fixed;
+}
+.alert-deleted,.alert-added{
+	display: none;
+	padding: 30px;
+	position: fixed;
+	left:30%;
+	right: 30%;
+	z-index: 99;
+	top:20px;
+	border-radius: 5px;
+	background-color: #2ecc71;
+	color: #FFF;
+	word-wrap: break-word;
+	max-width: 600px;
+}
+
+.alert img,.alert-deleted, .alert-added img{
+	float:left;
+}
+
+/************** FIN ERREURS *****************/
+
+
+
+
+/************** PAGE ACCUEIL *****************/
+
+/* Style pour les tooltips */
+.modif{
+	background-color: #d7e1ed;
+	border-radius: 3px;
+	color: #4a4a4a;
+	width: 35px;
+	height: 35px;
+	float: right;
+	margin-top: -52px;
+}
+.modif2{
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin-top: -12px;
+}
+.modif3{
+	width: 30px;
+	height: 30px;
+	float: left;
+	visibility: hidden;
+	position: relative;
+	margin-top: 8px;
+}
+.modif:hover{
+	cursor: pointer;
+}
+.tooltip{
+	top: 9px;
+}
+
+.tooltip,.tooltip3{
+	display: inline;
+	position: relative;
+	padding: 8px;
+}
+.tooltip:hover:before{
+	top: 0;
+	left: 30%;
+}
+.tooltip3:hover:before{
+	top: 14px;
+	left: 63%;
+}
+.tooltip4:hover:before{
+	top: -7px;
+	left: 30%;
+}
+.tooltip:hover:after{
+	top: -29px;
+	left: -200%;
+	width: 130px;
+}
+.tooltip4:hover:after{
+	top: -35px;
+	left: -215%;
+	width: 130px;
+}
+.tooltip3:hover:after{
+	top: -15px;
+	left: -380%;
+	width: 120px;
+}
+.tooltip:hover:before,.tooltip3:hover:before,.tooltip4:hover:before{
+    border: solid;
+	border-color: #2763a9 transparent;
+	border-width: 6px 6px 0 6px;
+	content: "";
+	position: absolute;
+	z-index: 99;
+}
+.tooltip:hover:after,.tooltip3:hover:after,.tooltip4:hover:after{
+    background: #2763a9;
+	border-radius: 5px;
+	color: #fff;
+	content: attr(title);
+	padding: 5px 15px;
+	position: absolute;
+	z-index: 98;
+}
+/* Fin Style pour les tooltips */
+
+.iconeAjouter{
+	margin-bottom:-8px;
+}
+.widthAligner{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 450px;
+	word-wrap: break-word;
+}
+.iconDone:hover,.lienDelete{
+	cursor: pointer;
+}
+.lienDone{
+	margin-top: -5px;
+	display: none;
+	float: right;
+	right: -25px;
+	margin-left: -20px;
+	position: relative;
+}
+.lienDelete{
+	margin-left: -30px;
+	margin-top: 25px;
+	display: none;
+	float: right;
+	right: -26px;
+	position: relative;
+}
+#arrow{
+	display: none;
+	position: absolute;
+	top: 50px;
+	right: 28%;
+}
+#arrow2{
+	display: none;
+	position: absolute;
+	right: -10%;
+	top: 80px;
+	opacity: 0.8;
+}
+#bienvenue{
+	display: none;
+	margin-top: 40px;
+}
+.titleProject{
+	height: 30px;
+	font-size: 0.9em;
+	font-weight: bold;
+	color: #4a4a4a;
+	text-align: center;
+	background: transparent;
+	border: 1px solid #ccc;
+}
+#submitProject{
+	position: absolute;
+	top: 0;
+	right: -45px;
+}
+.top{
+	margin-top: 40px;
+}
+.addTask{
+	float: right;
+}
+.addTask:hover{
+	cursor: pointer;
+}
+.addForm{
+	display: none;
+	/*float: left;*/
+	margin-bottom: 20px;
+	width: 100%;
+	margin-top: 40px;
+}
+
+/* Style DateContainer */
+.input-group.date .input-groupe-addon span{
+	display: block;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+}
+
+.container2{
+	max-width: 180px;
+	float: right;
+}
+.inputDate{
+	width: 140px;
+	height: 20px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px 0 0 3px;
+	border: 1px solid #ccc;
+	color: #777;
+	padding: 7px 0 7px 4px;
+	float: right;
+}
+
+.datepicker-dropdown.datepicker-orient-left:before {
+left: 188px !important;
+}
+.datepicker-dropdown.datepicker-orient-left:after {
+left: 190px !important;
+}
+
+.input-group {
+position: relative;
+display: table;
+border-collapse: separate;
+}
+
+.glyphicon-time:before {
+	/*content: "\d83d\dcc5";*/
+}
+
+.glyphicon {
+position: relative;
+top: 1px;
+display: inline-block;
+font-family: 'Glyphicons Halflings';
+font-style: normal;
+font-weight: normal;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+
+}
+
+.input-group-addon, .input-group-btn {
+width: 1%;
+white-space: nowrap;
+vertical-align: middle;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+display: table-cell;
+}
+
+.input-group-addon {
+padding: 6px 16px;
+font-size: 14px;
+font-weight: normal;
+line-height: 1;
+color: #555555;
+text-align: center;
+background-color: #eeeeee;
+border: 1px solid #cccccc;
+border-radius: 0 3px 3px 0;
+background-image: url('../img/calendar.png');
+background-repeat: no-repeat;
+background-size: 80%;
+background-position: 3px 4px;
+}
+
+/* Fin style DateContainer */
+.sectionProject{
+	padding: 15px 30px;
+	border: 2px solid #d5e0eb;
+	background-color: #FFF;
+	border-radius: 5px;
+	text-align: left;
+	min-width: 206px;
+	min-height: 43px;
+}
+
+#sections{
+	overflow-x : auto;
+	overflow-y:hidden;
+	max-width: 2000px;
+	white-space: nowrap;
+	padding-top: 30px;
+	background-color: #e9f0f8;
+	padding-bottom: 60px;
+	width: 100%;
+}
+
+.iconDeleteProject:hover{
+	cursor: pointer;
+}
+
+.div{
+	width: 38%;
+	display: inline-block;
+	position: relative;
+	margin-left: 10px;
+	vertical-align: top;
+}
+
+.titreAjax{
+	margin-left: 25px;
+	color:#4a4a56;
+	max-width: 73%;
+	display: block;
+	word-break:break-word;
+}
+
+.ligneHeader{
+	border-bottom: 2px solid #c4c4c4;
+}
+
+.titreTh{
+	color:#4a4a4a;
+	font-size: 1.2em !important;
+	font-weight: 800;
+	height: 32px;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	border-bottom: 2px solid #c4c4c4;
+	clear: both;
+}
+
+.titreTd span.rightStuff{
+	float: right;
+	color:#999;
+	font-size: 0.8em;
+	margin-top: -18px;
+}
+
+.titreTd{
+	white-space: normal;
+	padding-right: 0 !important;
+}
+
+.marginBottom{
+	margin-bottom: 25px;
+}
+
+.titreTd a{
+	display: inline-block;
+	opacity: 0;
+}
+
+.cercle1, .cercle2, .cercle3, .cercle4{
+	width:10px;
+	height: 10px;
+	border-radius: 5px;
+	float: left;
+	margin-top: 7px;
+}
+
+.cercle1{
+	background-color: #27ae60;
+}
+.cercle2{
+	background-color: #f39c12;
+}
+.cercle3{
+	
+	background-color: #c0392b;
+}
+.cercle4{
+	background-color: #ccc;
+}
+
+/** Formulaire ajouter **/
+#ajouTache{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+	margin-bottom: 20px;
+	display: none;
+}
+
+#ajouTache input[type="text"]{
+	border-radius: 4px;
+}
+
+.btAjouter{
+	background-color: #3498db;
+	color:#fff;
+	border:none;
+	height: 40px;
+	width: 30%;
+	clear:both;
+	display:block;
+	border-radius:4px;
+}
+.btAjouter:hover{
+	cursor: pointer;
+	background-color: #2980b9;
+}
+.titreTache{
+	width: 100%;
+	height: 30px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border: 1px solid #8B8E93;
+	border-radius: 4px;
+	padding: 4px 0px 4px 4px;
+	font-family:'Lato', sans-serif;
+}
+#description{
+	float: left;
+	font-size: 14px;
+	height: 55px;
+	font-family:'Lato', sans-serif;
+	margin-bottom: 5px;
+	margin-top: 10px;
+	max-height: 100px;
+	max-width: 100%;
+	clear: both;
+	border-radius: 4px;
+	width: 100%;
+	border: 1px solid #BFC7D1;
+	padding: 4px 0 4px 4px;
+}
+.listeProjets{
+	height: 42px;
+	background-color: #3498db;
+	color:#FFF;
+	float:left;
+	margin-left: 10px;
+	width: 27%;
+	border-radius: 4px;
+	max-width: 162px;
+}
+.titreTacheProjet{
+	width: 215px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	height: 25px;
+	padding: 4px 0 4px 4px;
+}
+#normal{
+	background-color: #2ecc71;
+}
+#prioritaire{
+	background-color: #f39c12;
+}
+#urgent{
+	background-color: #c0392b;
+}
+
+select { background-color: #c0392b; }
+option:not(:checked) { background-color: #c0392b; }
+
+option:hover {
+	background-color: #c0392b;
+}
+.listePriorite{
+	height: 40px;
+	background-color: #3498db;
+	color:#FFF;
+	float:left;
+	width: 27%;
+	margin-top: 1px;
+	border-radius: 4px;
+}
+.listePriorite:hover,.listeProjets:hover{
+	cursor: pointer;
+}
+#datecontainer input {
+	width: 140px;
+	background: #f1f1f1;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #777;
+	padding: 7px 0;
+	float: left;
+	display: table;
+}
+.descriptionTache{
+	color: #999;
+	font-size: 0.7em;
+	max-width: 73%;
+	margin-left: 25px;
+	margin-top: 8px;
+	display: block;
+}
+
+.desc{
+	color: #999;
+	max-width: 73%;
+	margin-top: 8px;
+	min-width: 85%;
+	display: block;
+	height: 60px;
+	max-height: 90px;
+}
+
+.titleComplete{
+	margin-left: 15px;
+	word-wrap:break-word;
+	max-width: 73%;
+	display: block;
+	margin-left: 25px;
+}
+
+/** FIN Formulaire ajouter **/
+
+#tdComplete{
+	color:#959595 !important;
+	text-decoration: line-through;
+}
+
+#title{
+	max-width: 73%;
+	min-width: 85%;
+	display: block;
+	color: #4a4a56;
+	border: 1px solid #ccc;
+	font-family: 'Lato', Arial, sans-serif;
+	font-size: 1em;
+}
+
+.urgentLabel{
+	background-color:#c0392b;
+}
+.prioritaireLabel{
+	background-color:#f39c12;
+}
+.normalLabel{
+	background-color:#27ae60;
+}
+.radioCacher{
+	display: none;
+}
+.buttonPriority{
+	margin-top: 9px;
+}
+.buttonPriority label{
+	padding: 8px;
+	color: #FFF;
+	border-radius: 5px;
+}
+.buttonPriority label:hover{
+	cursor: pointer;
+}
+.buttonPriority input:checked + label{
+	border-radius: 0;
+	opacity: 0.8;
+	/*border: 1px solid #1a1a1a;*/
+}
+#ajoutProjet{
+	position: absolute;
+	left: 42%;
+	top: 30px;
+}
+.btAjouterProjet:hover{
+	cursor: pointer;
+}
+.btAjouterProjet{
+	background-color: transparent;
+	border: none;
+	background-image: url('../img/submit.png');
+	background-size: 96%;
+	background-repeat: no-repeat;
+	height: 35px;
+	width: 35px;
+	margin-left: 6px;
+	float: right;
+}
+.labelProjet{
+	color: #FFF;
+}
+/************** FIN PAGE ACCUEIL *****************/
+
+
+
+
+
+
+/************** PAGE LOGIN *****************/
+#connexion{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border: 2px solid #d5e0eb;
+	border-radius: 5px;
+	margin-top: 20px;
+	background-color: #FFF;
+}
+
+#connexion label {
+    display: inline-block;
+    width: 125px;
+    text-align: left;
+    float: left;
+    font-size: 1.1em;
+    margin-left: 18px;
+    margin-bottom: 5px;
+}
+#connexion input.inputWidth,#connexion input[type="password"]{
+	width:80%;
+	height: 40px;
+	font-size: 18px;
+	border: 1px solid #95a5a6;
+	padding-left: 40px;
+	font-family:'Lato', sans-serif;
+}
+
+#connexion #email{
+	background: url('/public/img/arobase.gif') no-repeat;
+	background-position: 5px 4px;
+	background-size: 9%;
+}
+
+#connexion #password{
+	background: url('/public/img/cadenas.png') no-repeat;
+	background-position: 5px 5px;
+	background-size: 8%;
+}
+
+.ok{
+	background-color: #3498db;
+	color:#fff;
+	border:none;
+	height: 44px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	clear:both;
+	display:block;
+}
+.ok:hover{
+	cursor: pointer;
+	background-color: #2980b9;
+}
+
+.lienTodo, .lienTodo:visited{
+	color:#3498db;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+.middle{
+	margin-top: 8%;
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.middle h2{
+	margin-bottom: 0;
+}
+
+/************** FIN PAGE LOGIN *************/
+
+
+
+
+
+/************** PAGE CRÉER COMPTE *****************/
+#creerCompte{
+	border-radius: 5px;
+	margin: 0;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	border: 2px solid #d5e0eb;
+	background-color: #FFF;
+}
+
+#creerCompte label {
+    display: inline-block;
+	width: 185px;
+	text-align: left;
+	margin-left: 22px;
+	font-size: 1.1em;
+	margin-bottom: 5px;
+	float: left;
+}
+
+#creerCompte input.inputWidth,#creerCompte input[type="password"] {
+	height: 35px;
+	font-size: 18px;
+	width:89%;
+	border: 1px solid #95a5a6;
+	padding: 4px 0 4px 4px;
+	font-family:'Lato', sans-serif;
+}
+.middle2{
+	margin-top:6%;
+	max-width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+}
+/************** FIN PAGE CRÉER COMPTE *************/
+
+
+
+/*************** Style pour mobile ***************/
+@media screen and (max-width: 800px){
+	.errorMessage{
+		position: relative;
+		padding: 0;	
+	}
+}
+
+@media screen and (max-width: 680px){
+	.titreTacheProjet{
+		width: 110px;
+}
+
+@media screen and (max-width: 525px){
+	.middle,.middle2{
+		margin-top: 0;
+		max-width: 380px;
+	}
+	.sectionProject{
+		width: 100%;
+		padding: 10px;
+	}
+	.div{
+		width:96%;
+		margin-left: 0;
+		margin-right: 20px;
+	}
+
+	.titreTache,#description{
+		width: 100%;
+	}
+	.ok{
+		width: 98%;	
+	}
+	
+	.listeProjets{
+		margin-left:0;
+		margin-bottom: 10px;
+		width: 50%;
+	}
+	.labelProjet{
+		line-height: 3em;
+	}
+
+	#sectionAjouterProjet .widthAligner{
+		margin-bottom: 0;
+	}
+	h2{
+		font-size: 1.5em;
+	}
+	#connexion input.inputWidth{
+		width: 85%;
+		background-size: 9% !important;
+	}
+	#connexion label{
+		width:100%;
+		margin-bottom: 5px;
+		margin-left: 0;
+		font-size: 0.9em;
+	}
+	#creerCompte input.inputWidth{
+		width: 98%;
+	}
+	#creerCompte label{
+		text-align: left;
+		margin-bottom: 5px;
+		margin-left: 0;
+		width:100%;
+		font-size: 0.9em;
+	}
+	#creerCompte,#connexion{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#connexion input[type="password"]{
+		width: 85%;
+	}
+	.listePriorite{
+		margin-top: 0;
+		float: right;
+		width: 40%;
+	}
+	#decoT{
+		display: none;
+	}
+	#decoM,.errorMessage{
+		display:block;
+	}
+	#bonjour{
+		max-width: 140px;
+	}
+}
+
+@media screen and (max-width: 370px){
+	#bonjour{
+		width:100px;
+		font-size: 1em;
+		top:12px !important;
+	}
+	.titreT{
+		display:none;
+	}
+	.titreM{
+		display: block;
+	}
+	.btAjouter,#datecontainer input{
+		width: 100%;
+	}
+}
+/*************** FIN Style pour mobile ***************/

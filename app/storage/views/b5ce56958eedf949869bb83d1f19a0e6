@@ -1,0 +1,23 @@
+
+<?php $__env->startSection('title'); ?>
+@parent
+Login
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<h2>Connectez vous !</h2>
+
+<?php
+	echo '<form method="POST" name="login" action="' . URL::to('login') . '">';
+    echo '<p><label for="email">Votre courriel : </label>';
+    echo '<input type="text" id="email" name="email" placeholder="Courriel"></p>';
+    echo '<p><label for="email">Mot de passe : </label>';
+    echo '<input type="password" id="password" name="password"></p>';
+    echo '<p><input type="submit" class="ok" value="OK"></p>';
+    echo '</form>';
+
+ 
+	  echo '<p>Ou <a href="' . URL::to('signup') . '">créer un compte</a></p>';
+?>	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

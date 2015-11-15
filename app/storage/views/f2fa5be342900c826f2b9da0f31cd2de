@@ -1,0 +1,44 @@
+
+<?php $__env->startSection('title'); ?>
+@parent
+Nous joindre
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<h2>Complété cette semaine (<?php echo $nbrTasksDone; ?>)</h2>
+
+	<?php
+		if($nbrTasksDone==0)
+		{
+			echo '<p>Aucune tâche de complétée cette semaine.</p>';
+		}
+	?>
+	<ul class="listeFait">
+		<?php foreach($listeFaitWeek as $cle): ?>
+        <li><?php echo $cle->title; ?><span class="dateFait">Hier</span></li>
+    	<?php endforeach; ?>
+	</ul>
+
+<h2>Toutes les tâches complétées (<?php echo $nbrTasksDoneAll; ?>)</h2>
+		<?php echo Form::open(array('url' => '')); ?>
+    	<select name="listeProjets" id="listeProjets">
+    		<?php foreach($projectsList as $cle): ?>
+        	<option value="<?php echo $cle->id; ?>"><?php echo $cle->name; ?></option>
+    		<?php endforeach; ?>
+    	</select>
+		<?php echo Form::close(); ?>
+
+	<?php
+		if($nbrTasksDoneAll==0)
+		{
+			echo '<p>Aucune tâche de complétée pour le moment.</p>';
+		}
+	?>	
+	<ul class="listeFait">
+		<?php foreach($listeFait as $cle): ?>
+        <li><?php echo $cle->title; ?><span class="dateFait">Hier</span></li>
+    	<?php endforeach; ?>
+	</ul>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

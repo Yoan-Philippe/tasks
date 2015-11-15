@@ -1,0 +1,49 @@
+
+<?php $__env->startSection('title'); ?>
+    @parent Signup
+<?php $__env->stopSection(); ?>
+
+<!--
+Auteur : Yoan Philippe
+Email : yoan.philippe@hotmail.com
+Date : 2014-05-31
+Description : Vue de la page création de compte, contient un formulaire construit avec la
+syntaxe de Blade.
+-->
+
+<?php $__env->startSection('content'); ?>
+
+<div class="middle2">
+
+    <h2 class="titreCreerCompte">Créer un compte</h2>
+
+        <?php echo Form::open(array('id' => 'creerCompte', 'url' => 'signup','method' => 'post')); ?>
+        <p>
+        <?php echo Form::label('prenom','Prénom : '); ?>
+        <?php echo Form::text('prenom', Input::old('prenom'), array('class' => $errors->has('prenom') ? 'error inputWidth' : 'inputWidth','id'=>'prenom')); ?> 
+        <?php if($errors->has('prenom')) echo '<span class="errorMessage">' . $errors->first("prenom") . '</span>'; ?>
+        </p>
+        <p>
+        <?php echo Form::label('email','Courriel : '); ?>
+        <?php echo Form::text('email', Input::old('email'), array('class' => $errors->has('email') ? 'error inputWidth' : 'inputWidth','id'=>'email')); ?>
+        <?php if($errors->has('email')) echo '<span class="errorMessage">' . $errors->first("email") . '</span>'; ?>
+        </p>
+        <p>
+        <?php echo Form::label('password','Mot de passe : '); ?>
+        <?php echo Form::password('password', array('class' => $errors->has('password') ? 'error inputWidth' : 'inputWidth')); ?>
+        <?php if($errors->has('password')) echo '<span class="errorMessage">' . $errors->first("password") . '</span>'; ?>
+        </p>
+        <p>
+        <?php echo Form::label('password_confirmation','Confirmation : '); ?>
+        <?php echo Form::password('password_confirmation', array('class' => $errors->has('password_confirmation') ? 'error inputWidth' : 'inputWidth')); ?>
+        <?php if($errors->has('password_confirmation')) echo '<span class="errorMessage">' . $errors->first("password_confirmation") . '</span>'; ?>
+        </p>
+        <?php echo Form::submit('Enregistrer',array('class'=>'ok')); ?>
+        <?php echo Form::close(); ?>
+
+</div>
+
+<p>Ou <a class="lienTodo" href="<?php echo URL::to('login'); ?>">se connecter</a></p>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

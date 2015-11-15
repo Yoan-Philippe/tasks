@@ -1,0 +1,20 @@
+
+
+<?php $__env->startSection('title'); ?>
+@parent
+Nous joindre
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<h1>Nous joindre</h1>
+
+	<?php echo Form::open(array('url' => '')); ?>
+    <?php echo Form::label('name', 'Nom'); ?>
+    <?php echo Form::text('username'); ?>
+	<?php echo Form::label('pwd', 'Mot de passe'); ?>
+    <?php echo Form::password('pwd'); ?>
+    <?php echo Form::submit('OK'); ?>
+	<?php echo Form::close(); ?>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

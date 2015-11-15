@@ -1,0 +1,13 @@
+<a href="<?php echo URL::to( '/'); ?>"><img src="img/logo.png" alt="Logo" id="logo" /></a>
+<?php 
+if (Auth::check())
+{
+	$nom = Auth::user()->username;
+	echo "<p id='bonjour'>Bonjour, <span style='color:#2980b9'>". $nom . "</span></p><p id='logout'><a href='" . URL::to('logout') ."'>Déconnexion</a></p>";
+?>
+<ul class="menu">
+	<li><a href="<?php echo URL::to( '/'); ?>">Accueil</a> &nbsp;|</li>
+	<li><a href="<?php echo URL::to( 'projects'); ?>">Mes projets</a> |</li>
+	<li><a href="<?php echo URL::to( 'complete'); ?>">Tâches complétées</a></li>
+</ul>
+<?php }?>

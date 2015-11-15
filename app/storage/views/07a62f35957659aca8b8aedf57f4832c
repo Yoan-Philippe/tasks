@@ -1,0 +1,38 @@
+
+<?php $__env->startSection('title'); ?>
+@parent
+Mes projets
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+<?php foreach($project as $cle): ?>
+		<?php
+		$idProjet = $cle->id;
+		$id = Auth::user()->id;
+		$nbrTasks = Task::join('projects','tasks.project_id','=','projects.id')->where('projects.user_id','=',$id)->where('tasks.isDone','=',0)->where('tasks.project_id','=',$idProjet)->count();
+		$tasks = Task::join('projects','tasks.project_id','=','projects.id')->where('projects.user_id','=',$id)->where('tasks.isDone','=',0)->where('tasks.project_id','=',$idProjet)->orderBy('tasks.priority', 'asc')->get(array('tasks.*'));
+		?>
+        <h2><?php echo $cle->name; ?> (<?php echo $nbrTasks; ?>)</h2>
+        <ul class="listeToday">
+        <?php foreach($tasks as $cle): ?>
+        	<li class="pr<?php echo $cle->priority; ?>"><?php echo $cle->title; ?></li>
+        	<div class="boite">
+				<p><?php echo $cle->description; ?> <a href="done/<?php echo $cle->id; ?>"><img class="iconDone" src="img/icon_done.png" alt="Done"></a><a href="delete/<?php echo $cle->id; ?>"><img class="iconDelete" src="img/icon_delete.png" alt="Delete"></a><p>
+			</div>
+		<?php endforeach; ?>
+		</ul>
+<?php endforeach; ?>  
+
+<h2 id="titreAjouter">Ajouter un projet <img alt="plus" src="img/plus.png" /></h2>
+<div id="ajoutProjet">
+		<?php echo Form::open(array('id' => 'formID', 'url' => 'ajoutProjet')); ?>
+		<?php echo Form::label('titre','Titre du projet : '); ?>
+    	<?php echo Form::text('titre', Input::old('titre'), array('placeholder'=>'Insérer un titre','class'=>'titreTacheProjet')); ?>
+    	<?php echo Form::submit('Ajouter',array('class'=>'btAjouterProjet')); ?>
+		<?php echo Form::close(); ?>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

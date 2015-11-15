@@ -1,0 +1,63 @@
+
+<?php $__env->startSection('title'); ?>
+@parent
+Accueil
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+<h2>Mes tâches d'aujourd'hui (<?php echo $nbrTasks; ?>)<br />
+		<span id="dateToday"><?php echo $date; ?></span></h2>
+		<?php
+		if($nbrTasks==0)
+		{
+			echo '<p>Aucune tâche de plannifié, bonne journée :) <img id="cafe" src="img/cafe.gif" /></p>';
+		}
+		 ?>
+		<ul class="listeToday">
+
+		<?php foreach($tasks as $cle): ?>
+        <li class="pr<?php echo $cle->priority; ?>"><?php echo $cle->title; ?></li>
+        	<div class="boite">
+				<p><?php echo $cle->description; ?> <a href="done/<?php echo $cle->id; ?>"><img class="iconDone" src="img/icon_done.png" alt="Done"></a><a href="delete/<?php echo $cle->id; ?>"><img class="iconDelete" src="img/icon_delete.png" alt="Delete"></a><p>
+			</div>
+    	<?php endforeach; ?>
+
+		</ul>
+		<h2>Mes tâches cette semaine (<?php echo $nbrTasksWeek; ?>)</h2>
+		<?php
+		if($nbrTasksWeek==0)
+		{
+			echo '<p>Aucune tâche de plannifié, bonne semaine :D</p>';
+		}
+		 ?>
+		<ul class="listeToday">
+			<?php foreach($tasksWeek as $cle): ?>
+        	<li class="pr<?php echo $cle->priority; ?>"><?php echo $cle->title; ?></li>
+        	<div class="boite">
+				<p><?php echo $cle->description; ?> <a href="done/<?php echo $cle->id; ?>"><img class="iconDone" src="img/icon_done.png" alt="Done"></a><a href="delete/<?php echo $cle->id; ?>"><img class="iconDelete" src="img/icon_delete.png" alt="Delete"></a><p>
+			</div>
+    	<?php endforeach; ?>
+		</ul>
+		<p id="test"></p>
+
+		<h2 id="titreAjouter">Ajouter une tâche <img alt="plus" src="img/plus.png" /></h2>
+		<div id="ajouTache">
+
+		<?php echo Form::open(array('id' => 'formID', 'url' => 'ajout')); ?>
+    	<?php echo Form::text('titre', Input::old('titre'), array('placeholder'=>'Insérer un titre','class'=>'titreTache')); ?> 
+    	<select name="listeProjets" class="listeProjets">
+    		<?php foreach($projectsList as $cle): ?>
+        	<option value="<?php echo $cle->id; ?>"><?php echo $cle->name; ?></option>
+    		<?php endforeach; ?>
+    	</select>
+    	<?php echo Form::select('priority', array('1' => '1','2'=>'2','3'=>'3'),'1',array('class'=>'listePriorite')); ?><br />
+    	<?php echo Form::textarea('description', null, array('id'=>'description','placeholder'=>'Insérer une description')); ?> 
+    	<div id="datecontainer"><input type="date" placeholder="Select Date..." name="date" id="date"></div>
+    	<?php echo Form::submit('Ajouter',array('class'=>'btAjouter')); ?>
+		<?php echo Form::close(); ?>
+		</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

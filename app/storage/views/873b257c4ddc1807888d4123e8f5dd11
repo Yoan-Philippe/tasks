@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="icon" type="image/png" href="img/favico.png" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" type="text/css" href="css/content.css" />
+	<script src="js/modernizr.custom.js"></script>
+	
+	<title> 
+		Laravel - Remind
+	</title>
+</head>
+<body>
+	<div class="container">
+		<div class="middle">
+			<form action="<?php echo action('RemindersController@postRemind'); ?>" method="POST">
+    		<input type="email" name="email">
+    		<input type="submit" value="Send Reminder">
+ 			</form>
+		</div>
+
+	</div>
+</body>
+
+</html>

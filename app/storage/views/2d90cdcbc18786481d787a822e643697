@@ -1,0 +1,83 @@
+
+<?php $__env->startSection('title'); ?>
+	@parent Tâches complétées
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+	<?php $nbrProjet = count($projectsList);
+	//Vérifie s'il existe un projet, si oui, les affiches dans la liste déroulante
+	if($nbrProjet!=0){ ?>
+			<?php echo Form::open(array('url' => '')); ?>
+	    	<select name="listeProjets" id="listeProjets">
+	    		<option value="0">Tous les projets</option>
+	    		<?php 
+	    		if(isset($_GET['project_id']))
+	    		$id = $_GET['project_id'];
+	    		else
+	    		$id = "0";
+	    		?>
+	    		<?php foreach($projectsList as $cle): ?>
+	        		<option <?php if($id==($cle->id)){echo "selected='selected'";} ?> value="<?php echo $cle->id; ?>"><?php echo $cle->name; ?></option>
+	    		<?php endforeach; ?>
+	    	</select>
+			<?php echo Form::close(); ?>
+	<?php } ?>
+
+	<div id="test" style="width:50%; margin-left:auto; margin-right:auto;">
+
+	<h2>Complété cette semaine (<?php echo $nbrTasksDone; ?>)</h2>
+
+	<?php
+	//Vérifie s'il y a une tâche de complété
+		if($nbrTasksDone==0)
+		echo '<p>Aucune tâche de complétée cette semaine.</p>';
+	?>
+	<ul class="listeFait">
+		<?php foreach($listeFaitWeek as $cle): ?>
+		<?php $time = $cle->done_at; ?>
+        <li><?php echo $cle->title; ?><span class="dateFait"><?php echo humanTiming($time); ?> ago</span><a class="iconDeleteComplete" href="deleteComplete/<?php echo $cle->id; ?>"><img width="40" src="img/icon_delete.png" alt="Delete"></a></li>
+    	<?php endforeach; ?>
+	</ul>
+
+	<h2>Toutes les tâches complétées (<?php echo $nbrTasksDoneAll; ?>)</h2>
+
+	<?php
+	//Vérifie s'il y a une tâche de complété
+	if($nbrTasksDoneAll==0)
+	{
+		echo '<p>Aucune tâche de complétée pour le moment.</p>';
+	} ?>	
+	<ul class="listeFait">
+		<?php foreach($listeFait as $cle): ?>
+		<?php $time = $cle->done_at; ?>
+        <li><?php echo $cle->title; ?><span class="dateFait"><?php echo humanTiming($time); ?> ago</span><a class="iconDeleteComplete" href="deleteComplete/<?php echo $cle->id; ?>"><img width="40" src="img/icon_delete.png" alt="Delete"></a></li>
+    	<?php endforeach; ?>
+	</ul>
+
+</div>
+
+	<?php 
+	//Retourne le temps écoulé depuis l'accomplission de la tâche
+	function humanTiming ($time)
+	{
+	    $time = time() - $time;
+	    $tokens = array (
+	        31536000 => 'year',
+	        2592000 => 'month',
+	        604800 => 'week',
+	        86400 => 'day',
+	        3600 => 'hour',
+	        60 => 'minute',
+	        1 => 'second'
+	    );
+
+	    foreach ($tokens as $unit => $text) {
+	        if ($time < $unit) continue;
+	        $numberOfUnits = floor($time / $unit);
+	        return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+	    }
+	} ?>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

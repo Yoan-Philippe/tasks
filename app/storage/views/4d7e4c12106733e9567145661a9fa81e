@@ -1,0 +1,18 @@
+
+<?php $__env->startSection('title'); ?>
+@parent
+Utilisateurs
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+<h1>Utilisateurs</h1>
+
+	<?php foreach($user as $cle): ?>
+        <p><strong><?php echo $cle->name; ?></strong> - <?php echo $cle->courriel; ?></p>
+    <?php endforeach; ?>
+
+	  
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

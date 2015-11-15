@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <h1>Ma première page</h1>
+        <form action="" method="get">
+        	<label for="name">Votre nom : </label>
+        <input type="text" id="name" name="name" />
+        <input type="submit" value="OK" />
+        </form>
+
+        <?php 
+        echo Input::get('name','Yoan');
+        ?>
+
+        <?php echo $__env->yieldContent('content'); ?>
+        <hr />
+        <p>© Yoan Philipe - By Laravel</p>
+    </body>
+</html>

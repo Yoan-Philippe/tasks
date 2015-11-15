@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<h1>Bonjour <?php echo $name; ?></h1>
+		<p>Merci de vous avoir inscrit à ma todo liste, voici votre liste de tâches :</p>
+
+		<?php foreach($project as $cle): ?>
+			<?php
+			$idProjet = $cle->id;
+			$id = Auth::user()->id;
+			$tasks = Task::join('projects','tasks.project_id','=','projects.id')->where('projects.user_id','=',$id)->where('tasks.project_id','=',$idProjet)->where('isDone','=',0)->get();
+			?>
+	        <h2><?php echo $cle->name; ?></h2>
+	        <ul class="listeToday">
+		        <?php foreach($tasks as $cle): ?>
+		        	<li><?php echo $cle->title; ?></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endforeach; ?>  
+
+	</body>
+</html>

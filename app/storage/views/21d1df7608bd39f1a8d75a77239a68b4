@@ -1,0 +1,62 @@
+
+<?php $__env->startSection('title'); ?>
+    @parent Mes projets
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<div id="contentProjet">
+    <div id="listeDeProjet">
+    <?php foreach($project as $cle): ?>
+    	<?php
+        setlocale(LC_TIME, "fr_FR");
+    	$idProjet = $cle->id;
+    	$id = Auth::user()->id;
+    	$nbrTasks = Task::join('projects','tasks.project_id','=','projects.id')->where('projects.user_id','=',$id)->where('tasks.isDone','=',0)->where('tasks.project_id','=',$idProjet)->count();
+    	$tasks = Task::join('projects','tasks.project_id','=','projects.id')->where('projects.user_id','=',$id)->where('tasks.isDone','=',0)->where('tasks.project_id','=',$idProjet)->orderBy('tasks.priority', 'asc')->get(array('tasks.*'));
+    	?>
+        <h2 class="titreProjet widthAligner"><?php echo $cle->name; ?> (<?php echo $nbrTasks; ?>)<a class="iconDeleteProject" href="deleteProject/<?php echo $cle->id; ?>"><img width="40" src="img/icon_delete.png" alt="Delete"></a></h2>
+
+        <?php
+        	if($nbrTasks!=0)
+        	{ ?>
+        	<ul class="listeToday">
+            	<?php foreach($tasks as $cle): ?>
+                    <?php $dates = $cle->dateFin;
+                    $data_inicial = strftime("%d %B %Y", strtotime($dates)); ?>
+                	<li class="pr<?php echo $cle->priority; ?>"><?php echo $cle->title; ?> <span>Pour le : <?php echo $data_inicial; ?></span></li>
+                	<div class="boite">
+        				<p class="pdescription"><?php echo $cle->description; ?><p><a href="done/<?php echo $cle->id; ?>"><img class="iconDone" src="img/icon_done.png" alt="Done"></a><a href="delete/<?php echo $cle->id; ?>"><img class="iconDelete" src="img/icon_delete.png" alt="Delete"></a>
+        			</div>
+    			<?php endforeach; ?>
+    		</ul>
+        	<?php }
+        	else{
+        		echo "<p>Aucune tâche de plannifié pour ce projet.</p>";
+        	} ?>
+            
+    <?php endforeach; ?> 
+</div>
+
+    <p id="test"></p>
+
+    <div class="erreur">
+        <?php if ( $errors->count() > 0 ): ?>
+            <?php foreach( $errors->all() as $message ): ?>
+              <p><?php echo $message; ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <div id="sectionAjouterProjet">
+        <h2 class="widthAligner" id="titreAjouterProjet">Ajouter un projet <img alt="plus" class="iconeAjouter" src="img/plus.png" /></h2>
+        <div id="ajoutProjet">
+    		<?php echo Form::open(array('id' => 'formProject', 'url' => '')); ?>
+    		<?php echo Form::label('titre','Titre du projet : ',array('class'=>'labelProjet')); ?>
+        	<?php echo Form::text('titre', Input::old('titre'), array('placeholder'=>'Insérer un titre','class'=>'titreTacheProjet','maxlength'=>'50')); ?>
+        	<?php echo Form::submit('Ajouter',array('class'=>'btAjouterProjet')); ?>
+    		<?php echo Form::close(); ?>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

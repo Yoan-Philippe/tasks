@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title> 
+		<?php $__env->startSection('title'); ?> 
+		Laravel - 
+		<?php echo $__env->yieldSection(); ?>
+
+	</title>
+</head>
+<body>
+    <?php echo $__env->make('layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<div class="container">
+
+		<?php echo $__env->yieldContent('content'); ?>
+
+	</div>
+
+		<?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

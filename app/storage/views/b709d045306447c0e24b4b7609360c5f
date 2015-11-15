@@ -1,0 +1,61 @@
+
+<?php $__env->startSection('title'); ?>
+    @parent Login
+<?php $__env->stopSection(); ?>
+<!--
+Auteur : Yoan Philippe
+Email : yoan.philippe@hotmail.com
+Date : 2014-05-31
+Description : Vue de la page connexion, contient une section pour les notifications et un 
+formulaire créé avec Blade.
+-->
+
+<?php $__env->startSection('content'); ?>
+
+    <?php if ($message = Session::get('success')): ?>
+            <div class="alert alert-success"><img alt="succes" width="18" src="img/alert1.png" />
+                <?php echo $message; ?>
+            </div>
+    <?php endif; ?>
+    <?php if ($message = Session::get('signup')): ?>
+            <div class="alert alert-success"><img alt="succes" width="18" src="img/alert1.png" />
+                <?php echo $message; ?>
+            </div>
+    <?php endif; ?>
+
+    <div class="middle">
+
+        <h2 class="titreLogin">Connecte-toi à ta Todo&nbsp;!</h2>    
+        <div class="erreur erreur-login">
+            <?php if ( isset($erreur) ): ?>
+                	<p><?php echo $erreur; ?></p>
+            <?php endif; ?>
+        </div>
+
+        <?php
+        if(isset($inputCourriel)){
+            $str = $inputCourriel;
+        }
+        else{
+            $str = "";
+        }
+
+        if($errors->has('email')) echo '<div class="erreur"><p>' . $errors->first("email") . '</p></div>';
+        ?>
+
+        <?php echo Form::open(array('id' => 'connexion', 'url' => '/','method' => 'post','autocomplete'=>'off')); ?>
+        <?php echo Form::label('email','Votre courriel : '); ?>
+        <?php echo Form::text('email', $str , array('autofocus'=>'on','class'=>'inputWidth','id'=>'email')); ?>
+        <p>
+        <?php echo Form::label('password','Mot de passe : '); ?>
+        <?php echo Form::password('password', null, array('class'=>'inputWidth','id'=>'password')); ?>
+        </p>
+
+        <?php echo Form::submit('OK',array('class'=>'ok')); ?>
+        <?php echo Form::close(); ?>
+
+
+    </div>
+<p>Ou <a class="lienTodo" href="<?php echo URL::to('signup'); ?>">créer un compte</a></p>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
